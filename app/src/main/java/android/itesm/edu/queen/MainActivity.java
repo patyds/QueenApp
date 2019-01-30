@@ -22,8 +22,58 @@ public class MainActivity extends AppCompatActivity {
     public void sing(View view){
         String file = "";
         switch(view.getId()){
+            case R.id.bohemian:
+                file = "bohemian";
+                goSong(file);
+                break;
+            case R.id.another:
+                file = "another";
+                goSong(file);
+                break;
+            case R.id.we:
+                file = "we";
+                goSong(file);
+                break;
+            case R.id.dont:
+                file = "dont";
+                goSong(file);
+                break;
+            case R.id.somebody:
+                file = "somebody";
+                goSong(file);
+                break;
+            case R.id.fat:
+                file = "fat";
+                goSong(file);
+                break;
+            case R.id.random:
+                Intent intent = new Intent(this, RandomActivity.class);
+                startActivityForResult(intent, 500);
+                break;
+            case R.id.site:
+                Uri page = Uri.parse("http://www.android.com");
+                Intent web = new Intent(Intent.ACTION_VIEW, page);
+                startActivity(web);
+                break;
+        }
 
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 500 && resultCode == RESULT_OK){
+            random.setText(data.getStringExtra("random"));
         }
 
     }
+
+    public void goSong(String file){
+        Intent intent =  new Intent(this, SongActivity.class);
+        intent.putExtra("file", file);
+        startActivity(intent);
+    }
+
+
 }
